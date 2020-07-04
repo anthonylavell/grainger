@@ -1,7 +1,8 @@
 package com.grainger.aia.uility;
 
+import org.springframework.stereotype.Service;
 
-
+@Service
 public final class Calculate {
     public static long distanceBetweenTwoPoints(double lat1, double long1, double lat2,
                                              double long2){

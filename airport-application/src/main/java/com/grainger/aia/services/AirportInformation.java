@@ -1,14 +1,16 @@
-package com.grainger.aia.uility;
+package com.grainger.aia.services;
 
 import com.grainger.aia.dao.IAirportRepository;
 import com.grainger.aia.entites.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public final class AirportInformation {
+@Service
+public class AirportInformation {
     @Autowired
-   private static IAirportRepository airportRepo;
+   private  IAirportRepository airportRepo;
 
-    public static Airport getInformation(String airportCode){
+    public Airport getInformationByCode(String airportCode){
         if(airportCode.length()>3){
             return airportRepo.findByIcaoCode(airportCode);
         }else {

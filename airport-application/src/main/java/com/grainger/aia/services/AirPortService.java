@@ -2,7 +2,7 @@ package com.grainger.aia.services;
 
 import com.grainger.aia.dao.IAirportRepository;
 import com.grainger.aia.entites.Airport;
-import com.grainger.aia.uility.AirportInformation;
+import com.grainger.aia.uility.Calculate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,9 @@ public class AirPortService {
     @Autowired
     IAirportRepository airportRepo;
 
+    @Autowired
+    AirportInformation airportInformation;
+
     public List<Airport> getAll(){
         return airportRepo.findAll();
     }
@@ -22,16 +25,19 @@ public class AirPortService {
         return airportRepo.findById(id).get();
     }
 
-    public Airport getAirportInfo(String airportCode){
-        return AirportInformation.getInformation(airportCode);
+    public Airport getAirportInfoByCode(String airportCode){
+        return airportInformation.getInformationByCode(airportCode);
     }
 
-    /*public long getDistanceInMiles(String originAirportCode,
+    public long getDistanceInMiles(String originAirportCode,
                                   String destinationAirportCode){
 
-       Airport airport1 = airportRepo.findByIataCode()
-        return airportRepo.findByIcaoCode(value);
-    }*/
+       Airport airport1 = airportInformation.getInformationByCode(originAirportCode);
+       Airport airport2 = airportInformation.getInformationByCode(destinationAirportCode);
+
+        return Calculate.distanceBetweenTwoPoints(airport1.getLatitude(),
+                airport1.getLongitude(), airport2.getLatitude(), airport2.getLongitude());
+    }
 
 
 }

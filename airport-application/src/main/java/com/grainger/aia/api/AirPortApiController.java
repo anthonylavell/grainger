@@ -21,13 +21,20 @@ public class AirPortApiController {
         return airPortService.getAll();
     }
 
-    @GetMapping(path = "/code/{airportCode}")
-    public Airport getAirPortInfoByAirPortCode(@PathVariable("airportCode") String airportCode){
-        return airPortService.getAirportInfo(airportCode);
-    }
-
     @GetMapping(path = "/{id}")
     public Airport getAirPortInfoById(@PathVariable("id") long id){
         return airPortService.getAirportInfoById(id);
+    }
+
+    @GetMapping(path = "/code/{airportCode}")
+    public Airport getAirPortInfoByAirPortCode(@PathVariable("airportCode") String airportCode){
+        return airPortService.getAirportInfoByCode(airportCode.toUpperCase());
+    }
+
+    @GetMapping(path = "/distance/{originAirportCode}/{destinationAirportCode}")
+    public long getDistanceBetweenAirportByAirPortCode(@PathVariable("originAirportCode") String originAirportCode,
+                                                       @PathVariable("destinationAirportCode") String destinationAirportCode){
+        return airPortService.getDistanceInMiles(originAirportCode.toUpperCase(),
+                destinationAirportCode.toUpperCase());
     }
 }
