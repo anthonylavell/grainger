@@ -1,0 +1,15 @@
+CREATE SEQUENCE IF NOT EXISTS airport_seq;
+
+CREATE TABLE IF NOT EXISTS airport (
+
+id integer NOT NULL DEFAULT nextval('airport_seq') PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+city VARCHAR(100) NOT NULL,
+country VARCHAR(100) NOT NULL,
+iata_code VARCHAR(100) NOT NULL,
+icao_code VARCHAR(100) NOT NULL,
+latitude DOUBLE PRECISION NOT NULL,
+longitude DOUBLE PRECISION NOT NULL,
+altitude integer NOT NULL,
+time_zone VARCHAR(100) NOT NULL
+);
