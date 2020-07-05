@@ -29,14 +29,15 @@ public class AirPortService {
         return airportInformation.getInformationByCode(airportCode);
     }
 
-    public long getDistanceInMiles(String originAirportCode,
+    public Travel getDistanceInMiles(String originAirportCode,
                                   String destinationAirportCode){
 
        Airport airport1 = airportInformation.getInformationByCode(originAirportCode);
        Airport airport2 = airportInformation.getInformationByCode(destinationAirportCode);
+       long miles = Calculate.distanceBetweenTwoPoints(airport1.getLatitude(),
+               airport1.getLongitude(), airport2.getLatitude(), airport2.getLongitude());
 
-        return Calculate.distanceBetweenTwoPoints(airport1.getLatitude(),
-                airport1.getLongitude(), airport2.getLatitude(), airport2.getLongitude());
+        return new Travel(airport1.getName(),airport2.getName(),miles);
     }
 
 
