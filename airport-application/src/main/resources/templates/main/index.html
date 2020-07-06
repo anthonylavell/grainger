@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head > </head>
-<title>Register Result</title>
+<head th:replace="layouts :: header"> </head>
+<title>Airport Result</title>
 <body>
-hello World
+<nav th:replace="layouts :: navbar"></nav>
 
-
+<div class="container">
+    <h3>Current Airports</h3>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Airport Name</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>IATA Code</th>
+                    <th>ICAO Code</th>
+                    <th>timeZone</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="airport : ${airports}">
+                    <td th:text="${airport.name}"></td>
+                    <td th:text="${airport.city}"></td>
+                    <td th:text="${airport.country}"></td>
+                    <td th:text="${airport.iataCode}"></td>
+                    <td th:text="${airport.icaoCode}"></td>
+                    <td th:text="${airport.timeZone}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
