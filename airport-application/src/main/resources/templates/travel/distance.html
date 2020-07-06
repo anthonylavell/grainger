@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header"></head>
+<title>Distance Between Two Airports</title>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<div class="container">
+ <form id="distanceForm">
+        <div class="form-group row">
+            <input id="departure" type="text" placeholder="Departure Code" >
+        </div>
+
+        <div class="form-group row">
+            <input id="arrival" type="text" placeholder="Arrival Code" >
+        </div>
+
+    <div class="form-group row">
+        <input id="miles" type="text" placeholder="Distance in Miles" >
+    </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                <button id="milesBtn" class="btn btn-info col-12"
+                        onclick="return false;" >Compute
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button id="resetBtn" class="btn btn-danger col-12" type="reset" >Reset
+                </button>
+            </div>
+        </div>
+</form>
+</div>
+<script type="text/javascript" th:src="@{/js/mileData.js}"></script>
+</body>
+</html>

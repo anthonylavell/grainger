@@ -21,4 +21,10 @@ public class AirportController {
         model.addAttribute("airports",listOfAirports);
         return "main/index";
     }
+    @GetMapping("/distance")
+    public String displayDistanceForm(Model model){
+
+        return "travel/distance";
+    }
+
 }
