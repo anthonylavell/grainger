@@ -1,16 +1,16 @@
 $( "#milesBtn" ).click(function() {
-    if(!$("#departure").val() || !$("#arrival").val()){
+    let departure = $("#departure").val();
+    let arrival = $("#arrival").val();
+    if(departure.length < 3 || arrival.length < 3){
         alert("Please check Airports codes");
     }else{
         let url = window.location.protocol+"//";
-        var host = new URL(document.URL).host;
-        url = url+ host+"/api/airports/distance/"+$("#departure").val()+"/"+$
-        ("#arrival").val
-        ();
-        console.log("url " + url);
+        let host = new URL(document.URL).host;
+        url = url+ host+"/api/airports/distance/"+departure+"/"+arrival;
+       // console.log("url " + url);
 
             $.getJSON(url, function(data) {
-                        console.log(data);
+                        //console.log(data);
                         $("#miles").val(data.miles);
 
                     }).error(function() {
