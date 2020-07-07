@@ -1,6 +1,5 @@
 package com.grainger.aia.exception;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,26 +15,13 @@ import java.util.List;
 
 @SuppressWarnings({"unchecked","rawtypes"})
 @ControllerAdvice
-@Slf4j
-public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @ExceptionHandler(NullPointerException.class)
-    public final ResponseEntity<Object> handleAllNulls(NullPointerException ex) {
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Server Error", details);
-        log.info("ErrorMessage", error.getMessage());
-        log.info("Httpstatus", HttpStatus.INTERNAL_SERVER_ERROR.toString());
-        return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler
+{
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllExceptions(Exception ex) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse("Server Error", details);
-        log.info("ErrorMessage", error.getMessage());
-        log.info("Httpstatus", HttpStatus.INTERNAL_SERVER_ERROR.toString());
         return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -43,7 +29,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> handleUserNotFoundException(RecordNotFoundException ex) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Information Not Found", details);
+        ErrorResponse error = new ErrorResponse("Record Not Found", details);
         return new ResponseEntity(error, HttpStatus.NOT_FOUND);
     }
 

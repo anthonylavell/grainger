@@ -1,6 +1,8 @@
 package com.grainger.aia.api;
 
 import com.grainger.aia.entites.Airport;
+import com.grainger.aia.exception.CustomExceptionHandler;
+import com.grainger.aia.exception.RecordNotFoundException;
 import com.grainger.aia.services.AirPortService;
 import com.grainger.aia.services.Travel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +24,29 @@ public class AirPortApiController {
         return airPortService.getAll();
     }
 
-    @GetMapping(path = "/{id}")
+    /*@GetMapping(path = "/{id}")
     public Airport getAirPortInfoById(@PathVariable("id") long id){
         return airPortService.getAirportInfoById(id);
-    }
+    }*/
 
     @GetMapping(path = "/code/{airportCode}")
-    public Airport getAirPortInfoByAirPortCode(@PathVariable("airportCode") String airportCode){
-        return airPortService.getAirportInfoByCode(airportCode.toUpperCase());
+    public Object getAirPortInfoByAirPortCode(@PathVariable("airportCode") String airportCode){
+        Airport airport= airPortService.getAirportInfoByCode(airportCode.toUpperCase());
+        if(airport == null) {
+            return new CustomExceptionHandler().handleUserNotFoundException(new RecordNotFoundException("Please check airport code"));
+        }
+        return airport;
     }
 
     @GetMapping(path = "/distance/{originAirportCode}/{destinationAirportCode}")
-    public Travel getDistanceBetweenAirportByAirPortCode(@PathVariable(
+    public Object getDistanceBetweenAirportByAirPortCode(@PathVariable(
             "originAirportCode") String originAirportCode,
                                                          @PathVariable("destinationAirportCode") String destinationAirportCode){
-        return airPortService.getDistanceInMiles(originAirportCode.toUpperCase(),
+        Travel travel = airPortService.getDistanceInMiles(originAirportCode.toUpperCase(),
                 destinationAirportCode.toUpperCase());
+        if(travel == null) {
+            return new CustomExceptionHandler().handleUserNotFoundException(new RecordNotFoundException("Please check airport codes"));
+        }
+        return travel;
     }
 }

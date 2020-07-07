@@ -1,4 +1,4 @@
-package com.grainger.aia.dao;
+package com.grainger.aia.repository;
 
 
 import com.grainger.aia.entites.Airport;

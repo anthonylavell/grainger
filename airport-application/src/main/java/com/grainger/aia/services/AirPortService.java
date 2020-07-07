@@ -1,6 +1,6 @@
 package com.grainger.aia.services;
 
-import com.grainger.aia.dao.IAirportRepository;
+import com.grainger.aia.repository.IAirportRepository;
 import com.grainger.aia.entites.Airport;
 import com.grainger.aia.uility.Calculate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,9 @@ public class AirPortService {
 
        Airport airport1 = airportInformation.getInformationByCode(originAirportCode);
        Airport airport2 = airportInformation.getInformationByCode(destinationAirportCode);
+       if(airport1 == null || airport2 == null){
+           return null;
+       }
        long miles = Calculate.distanceBetweenTwoPoints(airport1.getLatitude(),
                airport1.getLongitude(), airport2.getLatitude(), airport2.getLongitude());
 
