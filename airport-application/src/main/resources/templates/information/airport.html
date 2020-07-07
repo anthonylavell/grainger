@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="airport : ${airport2}">
+                <tr th:object= "${airport}">
                     <td th:text="${airport.name}"></td>
                     <td th:text="${airport.city}"></td>
                     <td th:text="${airport.country}"></td>

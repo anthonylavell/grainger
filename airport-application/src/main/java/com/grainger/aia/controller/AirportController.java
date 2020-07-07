@@ -5,11 +5,9 @@ import com.grainger.aia.services.AirPortService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -30,15 +28,19 @@ public class AirportController {
         return "travel/distance";
     }
 
-    @PostMapping("/airport/information")
-    public String displayAirportInformation( Airport airportCode, Model model,
-                                            Errors errors){
-
-        @Valid Airport airport =
-                airPortService.getAirportInfoByCode(airportCode.getIataCode().toUpperCase());
-
-        model.addAttribute("airport2",airport);
+    @GetMapping("/airport/information")
+    public String displayAirportInformation( @RequestParam("airportCode") String airportCode
+            , Model model){
+         Airport airport =
+                airPortService.getAirportInfoByCode(airportCode.toUpperCase());
+        if(airport == null){
+            return "error/error404";
+        }
+        model.addAttribute("airport",airport);
         return "information/airport";
     }
+
+
+
 
 }

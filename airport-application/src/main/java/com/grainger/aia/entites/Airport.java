@@ -1,6 +1,8 @@
 package com.grainger.aia.entites;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Airport {
@@ -11,22 +13,34 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "get_airport_seq")
     private long id;
 
+    @NotBlank(message="*Must give airport's name")
     private String name;
 
+    @NotBlank(message="*Must give airport's city")
     private String city;
 
+    @NotBlank(message="*Must give airport's country")
     private String country;
 
+
+    @NotBlank(message="*Must give airport's iata code")
     private String iataCode;
 
+
+    @NotBlank(message="*Must give airport's icao code")
     private String icaoCode;
 
+    @Min(value = 1, message = "*Age must be at least 1")
     private double latitude;
 
+    @Min(value = 1, message = "*Age must be at least 1")
     private double longitude;
 
+    @Min(value = 1, message = "*Age must be at least 1")
     private long altitude;
 
+
+    @NotBlank(message="*Must give airport's timezone")
     private String timeZone;
 
     public Airport(){
