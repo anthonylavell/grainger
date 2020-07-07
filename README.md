@@ -7,7 +7,7 @@
 * [Setup](#setup)
 
 ## General info
-This project is simple spring boot application that will return back airport information. The airport information is store in an embedded db (H2).
+This project is simple spring boot application that will return the distance in miles between to airports using their airport codes (IATA code or ICAO code). Using either IATA or ICAO code will retrieve airport information. The airport information is store in an embedded db (H2). Airport that are not define in the db will return error message. Distances between airports was calculate using haversine formula. Testing data and endpoint is done using Postman
 
 ## Endpoints
 Application has two sets of controllers.
