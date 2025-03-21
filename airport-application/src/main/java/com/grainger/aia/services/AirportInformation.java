@@ -11,10 +11,6 @@ public class AirportInformation {
    private  IAirportRepository airportRepo;
 
     public Airport getInformationByCode(String airportCode){
-        if(airportCode.length()>3){
-            return airportRepo.findByIcaoCode(airportCode);
-        }else {
-            return airportRepo.findByIataCode(airportCode);
-        }
+        return (airportCode.length()>3) ? airportRepo.findByIcaoCode(airportCode) : airportRepo.findByIataCode(airportCode);
     }
 }

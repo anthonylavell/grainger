@@ -16,7 +16,7 @@
 
 
 	<properties>
-		<java.version>14</java.version>
+		<java.version>23</java.version>
 	</properties>
 
 
